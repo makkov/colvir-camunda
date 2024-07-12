@@ -30,9 +30,6 @@
     <bpmn:sequenceFlow id="Flow_0zm341k" sourceRef="Activity_1uv7hnm" targetRef="Activity_0bbni6z" />
     <bpmn:sequenceFlow id="Flow_14b3363" sourceRef="Activity_1606xrf" targetRef="EndEvent_0x6ir2l" />
     <bpmn:userTask id="Activity_1606xrf" name="Финальный аппрув">
-<!--      <bpmn:extensionElements>-->
-<!--        <camunda:executionListener delegateExpression="" event="start" />-->
-<!--      </bpmn:extensionElements>-->
       <bpmn:incoming>Flow_1u8j6oe</bpmn:incoming>
       <bpmn:incoming>Flow_1f8y63c</bpmn:incoming>
       <bpmn:outgoing>Flow_14b3363</bpmn:outgoing>
@@ -72,6 +69,13 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isSecurityCheckApproved}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0wcoqqf">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="Input_2ukl753" />
+          <camunda:inputParameter name="Input_1l4ha46" />
+        </camunda:inputOutput>
+        <camunda:executionListener delegateExpression="${securityBacklog}" event="end" />
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0lek6os</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0lek6os" sourceRef="Gateway_0hpfw6w" targetRef="Event_0wcoqqf" />
@@ -82,6 +86,9 @@
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="colvir-camunda-process">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
+        <dc:Bounds x="1462" y="112" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1wbp9oh_di" bpmnElement="Activity_1wbp9oh">
         <dc:Bounds x="380" y="260" width="100" height="80" />
@@ -97,15 +104,12 @@
         <dc:Bounds x="760" y="440" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_091yr1q_di" bpmnElement="Activity_0t5qr8j">
-        <dc:Bounds x="380" y="420" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="EndEvent_0x6ir2l_di" bpmnElement="EndEvent_0x6ir2l">
-        <dc:Bounds x="1462" y="112" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0ry9zxl_di" bpmnElement="Activity_1606xrf">
         <dc:Bounds x="1300" y="90" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_091yr1q_di" bpmnElement="Activity_0t5qr8j">
+        <dc:Bounds x="380" y="420" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_015zbic_di" bpmnElement="Activity_0bbni6z">
@@ -122,11 +126,11 @@
       <bpmndi:BPMNShape id="Event_0wcoqqf_di" bpmnElement="Event_0wcoqqf">
         <dc:Bounds x="1462" y="332" width="36" height="36" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_01oykrl_di" bpmnElement="Event_0zgv2ib">
-        <dc:Bounds x="402" y="322" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0u0iwaf_di" bpmnElement="Event_0wh2ujg">
         <dc:Bounds x="1112" y="152" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01oykrl_di" bpmnElement="Event_0zgv2ib">
+        <dc:Bounds x="402" y="322" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1fp17al_di" bpmnElement="SequenceFlow_1fp17al">
         <di:waypoint x="215" y="117" />
